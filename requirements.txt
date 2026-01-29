@@ -1,0 +1,13 @@
+pyyaml~=6.0.3
+numpy~=2.4.1
+opencv-python~=4.13.0.90
+pillow~=12.1.0
+requests~=2.32.5
+replicate~=1.0.7
+
+# local mode dependencies
+torch~=2.10.0
+diffusers~=0.36.0
+transformers~=5.0.0
+accelerate~=1.12.0
+sentencepiece~=0.2.1

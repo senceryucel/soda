@@ -1,0 +1,43 @@
+project:
+  name: "prompt-to-dataset"
+  mode: "local"  # local or api
+  device: "cuda"
+  output_dir: "data/output"
+
+system:
+  optimize_gpu: false  # set to true if you have less than 40GB of VRAM. 
+  save_empty_images: true
+
+generation:
+  # the main prompt describing the scene. supports wildcards: {red|blue|pink}
+  prompt: "Close up view of sewing essentials on a {fabric tablecloth|wooden table}. A {red|blue|white} spool of thread with visible fiber texture sits next to a {silver metal|ceramic} thimble. {Soft diffused light|Hard shadow from lamp}, {loose thread strand|neat}, vintage vibe."
+  count: 250
+   
+  # generator model
+  api_model_id: "google/imagen-4"
+  local_model_id: "black-forest-labs/FLUX.1-schnell"
+
+  # flux params
+  params:
+    height: 1024
+    width: 1024
+    guidance_scale: 3.5
+    max_sequence_length: 512
+    num_inference_steps: 4
+
+detection:
+  # classes should be split with dot
+  prompt: "thread . thimble"
+  box_threshold: 0.45
+  text_threshold: 0.95
+  
+  api_model_id: "adirik/grounding-dino:efd10a8ddc57ea28773327e881ce95e20cc1d734c589f7dd01d2036921ed78aa"
+  local_model_id: "IDEA-Research/grounding-dino-base"
+  
+  class_map:
+    "thread": 0
+    "thimble": 1
+
+output:
+  # yolo, voc, json
+  format: "yolo"
